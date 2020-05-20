@@ -111,16 +111,4 @@ Also thanks to [basketball-reference.com](https://www.basketball-reference.com) 
 ---
 
 ### Conclusions and Recommendations
-While the optimal model's predictive accuracy was not very high at 68%, we are able to make a few conclusions and recommendations still.
 
-The model is too sensitive in that it rejects posts to 'NoStupidQuestions' when they are in fact 'TooAfraidToAsk'. Conversely, it does well in classifying posts to 'NoStupidQuestions' because of this. This is also indicative of the dataset not having clear cut verbage/subjects that separate the two subreddits.
-
-However, the main topics that occur most frequently relate to either medical/health conditions and family relationship questions. This indicates that these are the words that influence the model to classify into 'TooAfraidToAsk' the most. If we were to choose an area to invest resources in, it would be towards these two subjects.
-
-Support initiatives could include:
-- expansion and promotion of TeleHealth (perhaps an online version)
-- online relationship helpline and counselling (like 7cups, theSpark, or ginger.io)
-- creation/support/expansion of family health conversations (as per study from Nursing Research & Practice journal)<sup>1</sup>
-- directly adding to curriculum coping methods and tactics for discussion of sensitive matters
-
-<sup>1</sup>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3995177/

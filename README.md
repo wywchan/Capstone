@@ -31,7 +31,7 @@ A major assumption is that we will only predict a single year's salary for our o
 |year|int64|The NBA season of the observation|
 |player|object|The player's name|
 |pos|object|The player's position|
-|tm|object|The player's team. If he was traded during the season, we take total|
+|tm|object|The player's team. If he was traded during the season, we take the season total|
 |g|float64|Games played|
 |gs|float64|Games started|
 |mp|float64|Miutes played|

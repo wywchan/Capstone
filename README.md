@@ -8,19 +8,19 @@ Player/agent negotiations with teams have the potential to be contentious which 
 
 A neural network was successfully created that scored reasonably well in terms of r2 score at 74%. RMSE was reduced from baseline by almost 50%. Residuals from predictions are also mostly within calculated standard error of just under $5M. With more time and data, the model can be further refined and improved.
 
-The model performs well enough that it should provide a good starting point for any contract negotiations
+The model performs well enough that it should provide a good starting point for any contract negotiations. Further uses could be for fantasy sports that use an auction method for drafting.
 
 ### Methodology
 
 The project is conducted across three jupyter notebooks. The first being Data Acquisition, followed by EDA and then finally Modelling.
 
-I will use the NBA historical stats dataset from Kaggle and merge it with scraped salary information from hoopshype.com. I will begin with 10 years of data (2008-2017) which covers a decade of data that includes the last update of the NBA historical stats dataset. Once assembled, I will search for outliers for salary compared to winshares (WS) as well as minutes played. This should also remove outliers due to injury.
+I used the NBA historical stats dataset from Kaggle and merge it with scraped salary information from hoopshype.com. I used 10 seasons worth of statistics (2008-2017) which covers a decade of data that includes the last update of the NBA historical stats dataset. Once assembled, I added in player details such as height, weight, year entered into NBA and college. I then searched for outliers for salary compared to winshares (WS) as well as minutes played. This should have also removed outliers due to injury.
 
-I will then scale the results as part of preprocessing and encode the position before checking for correlation and adding possible interaction terms. I will then set up train/test splits for modelling with an initial test size of 0.25 and adjust down to 0.2 as needed.
+I scaled the results as part of preprocessing and encoded the position before checking for correlation and adding possible interaction terms. I initially set the test size at 0.25 but decreased it to 0.2 as the model was overfitting.
 
-I expect few incomplete records due to the quality of the source for the dataset (basketball-reference.com). I am cognizant that the author of the dataset may not have compiled everything without omissions. Additional challenges are that players that were traded during the season will have multiple rows which will need to be removed. I will use the 'TOT' row for that player instead which will contain the entire season's production. Some additional features that are available that haven't been added include player details (eg. which college they attended, height, weight, etc) will be considered for addition based on the initial model performance.
+The quality of the source for the dataset (basketball-reference.com) was excellent so no significant cleaning was needed. Additional challenges are that players that were traded during the season had multiple rows which were removed. I retained the 'TOT' row for that player instead which contained the entire season's production.
 
-A major assumption is that we will only predict a single year's salary for our output. This may cause issues as contracts can run for multiple years which is beyond the scope of this project. Additionally, features such as "Bird Rights" and various salary cap exceptions will not be considered as these features are generally not widely tracked in NBA statistical databases.
+A major assumption is that we will only need to predict a single year's salary for our output. This may cause issues in practice as contracts can run for multiple years which is beyond the scope of this project. Additionally, features such as "Bird Rights" and various salary cap exceptions will not be considered as these features are generally not widely tracked in NBA statistical databases.
 
 ---
 
@@ -31,7 +31,7 @@ A major assumption is that we will only predict a single year's salary for our o
 |year|int64|The NBA season of the observation|
 |player|object|The player's name|
 |pos|object|The player's position|
-|tm|object|The player's team. If he was traded during the season, we take the season total|
+|tm|object|The player's team. If he was traded during the season, we take the total|
 |g|float64|Games played|
 |gs|float64|Games started|
 |mp|float64|Miutes played|
@@ -106,9 +106,15 @@ Provided datasets:
 #### Acknowledgements
 Many thanks to Omri Goldstein for compiling and posting the dataset to Kaggle and Abid Rahman for updating it. The dataset can be found at https://www.kaggle.com/drgilermo/nba-players-stats
 
-Also thanks to [basketball-reference.com](https://www.basketball-reference.com) for curating NBA historical data and [Hoopshype](https://www.hoopshype.com) for making salary data available to the public.
+Also thanks to [basketball-reference](https://www.basketball-reference.com) for curating NBA historical data in a consumable way and [Hoopshype](https://www.hoopshype.com) for making salary data available to the public.
 
 ---
 
 ### Conclusions and Recommendations
+We were able to create a neural network that had moderate success statistically in predicting salaries based on production. The r2 test score was 74% and RMSE was reduced from baseline by almost 50%. In general, the features with the highest amount of correlation are related to scoring such as points and field goals as well as winshares. Furthermore, there appears to be a premium paid for higher profile athletes that is not related to their production.
 
+The model should sufficiently provide predictions to kick off negotiations at a level that are reasonably close to historical reality. Some limitations are as mentioned in the opening such as length of contract, increasing salary cap considerations as well as rights for some teams to pay more and offer longer term for their own players (Bird rights). Additionally, the model requires many inputs making it cumbersome to use.
+
+Further uses of the model could be for fantasy sports where players are drafted by auction instead of draft pick selection. Values can be better assigned to avoid overpaying a superstar for similar production of another lower profile player.
+
+Next steps include possibly adding in additional historical data since the model is a data hungry one. Furthermore, it seems a modifier is needed to account for "superstar" status as there is a premium paid to these players that isn't production based. Additionally, it could be interesting to put the salaries into bands and turn this into a classification problem. Since the model already performs well as a regression model this could be a better use of the neural network.

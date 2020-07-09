@@ -14,7 +14,7 @@ The model performs well enough that it should provide a good starting point for 
 
 The project is conducted across three jupyter notebooks. The first being Data Acquisition, followed by EDA and then finally Modelling.
 
-I used the NBA historical stats dataset from Kaggle and merge it with scraped salary information from hoopshype.com. I used 10 seasons worth of statistics (2008-2017) which covers a decade of data that includes the last update of the NBA historical stats dataset. Once assembled, I added in player details such as height, weight, year entered into NBA and college. I then searched for outliers for salary compared to winshares (WS) as well as minutes played. This should have also removed outliers due to injury.
+I used the NBA historical stats dataset from Kaggle and merged it with scraped salary information from hoopshype.com. I used 10 seasons worth of statistics (2008-2017) which covers a decade of data that includes the last update of the NBA historical stats dataset. Once assembled, I added in player details such as height, weight, year entered into NBA and college. I then searched for outliers for salary compared to winshares (WS) as well as minutes played. This should have also removed outliers due to injury.
 
 I scaled the results as part of preprocessing and encoded the position before checking for correlation and adding possible interaction terms. I initially set the test size at 0.25 but decreased it to 0.2 as the model was overfitting.
 
